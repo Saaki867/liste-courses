@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de Courses</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ma Liste de Courses</h1>
+        
+        <div class="add-form">
+            <input type="text" id="itemName" placeholder="Nouvel article...">
+            <input type="number" id="itemQuantity" placeholder="Quantité" min="1" value="1">
+            <button id="addButton">Ajouter</button>
+        </div>
+        
+        <div class="items-container">
+            <h2>Articles à acheter</h2>
+            <ul id="itemsList"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
