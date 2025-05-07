@@ -1,20 +1,34 @@
-// Stockage local des articles
+// Stockage local des articles (simule une base de données)
 let shoppingItems = [
     { id: 1, name: "Pain", quantity: 2 },
-    { id: 2, name: "Lait", quantity: 1 }
+    { id: 2, name: "Lait", quantity: 1 },
+    { id: 3, name: "Œufs", quantity: 12 }
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Créer l'élément de liste s'il n'existe pas
+    if (!document.getElementById('itemsList')) {
+        const container = document.querySelector('.items-container') || document.querySelector('body');
+        const itemsList = document.createElement('ul');
+        itemsList.id = 'itemsList';
+        container.appendChild(itemsList);
+    }
+
     // Charger les articles au démarrage
     loadItems();
     
     // Ajouter un écouteur d'événement sur le bouton d'ajout
-    document.getElementById('addButton').addEventListener('click', addItem);
+    const addButton = document.getElementById('addButton');
+    if (addButton) {
+        addButton.addEventListener('click', addItem);
+    }
 });
 
 // Fonction pour charger les articles (version locale)
 function loadItems() {
     const itemsList = document.getElementById('itemsList');
+    if (!itemsList) return;
+    
     itemsList.innerHTML = '';
     
     shoppingItems.forEach(item => {
@@ -38,6 +52,8 @@ function loadItems() {
 function addItem() {
     const nameInput = document.getElementById('itemName');
     const quantityInput = document.getElementById('itemQuantity');
+    
+    if (!nameInput || !quantityInput) return;
     
     const name = nameInput.value.trim();
     const quantity = parseInt(quantityInput.value) || 1;
