@@ -1,23 +1,23 @@
+// Stockage local des articles
+let shoppingItems = [
+    { id: 1, name: "Pain", quantity: 2 },
+    { id: 2, name: "Lait", quantity: 1 }
+];
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Charger les éléments initiaux (simulés)
+    // Charger les articles au démarrage
     loadItems();
     
     // Ajouter un écouteur d'événement sur le bouton d'ajout
     document.getElementById('addButton').addEventListener('click', addItem);
 });
 
-// Simuler la liste des articles (stockage local)
-let items = [
-    { id: 1, name: "Pain", quantity: 2 },
-    { id: 2, name: "Lait", quantity: 1 }
-];
-
-// Fonction pour charger les articles (simulation sans backend)
+// Fonction pour charger les articles (version locale)
 function loadItems() {
     const itemsList = document.getElementById('itemsList');
     itemsList.innerHTML = '';
     
-    items.forEach(item => {
+    shoppingItems.forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${item.name} (${item.quantity})</span>
@@ -34,7 +34,7 @@ function loadItems() {
     });
 }
 
-// Fonction pour ajouter un article (simulation sans backend)
+// Fonction pour ajouter un article (version locale)
 function addItem() {
     const nameInput = document.getElementById('itemName');
     const quantityInput = document.getElementById('itemQuantity');
@@ -47,9 +47,11 @@ function addItem() {
         return;
     }
     
-    // Simuler l'ajout d'un article
-    const newId = items.length > 0 ? Math.max(...items.map(item => item.id)) + 1 : 1;
-    items.push({ id: newId, name: name, quantity: quantity });
+    // Générer un nouvel ID
+    const newId = shoppingItems.length > 0 ? Math.max(...shoppingItems.map(item => item.id)) + 1 : 1;
+    
+    // Ajouter l'article à la liste locale
+    shoppingItems.push({ id: newId, name: name, quantity: quantity });
     
     // Vider les champs
     nameInput.value = '';
@@ -59,11 +61,11 @@ function addItem() {
     loadItems();
 }
 
-// Fonction pour supprimer un article (simulation sans backend)
+// Fonction pour supprimer un article (version locale)
 function deleteItem(id) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-        // Simuler la suppression
-        items = items.filter(item => item.id != id);
+        // Supprimer l'article de la liste locale
+        shoppingItems = shoppingItems.filter(item => item.id != id);
         
         // Recharger la liste
         loadItems();
